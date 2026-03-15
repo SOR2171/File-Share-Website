@@ -1,0 +1,1 @@
+MUSIC_FOLDER = "/home/git/syncthing/AppleMusic"
