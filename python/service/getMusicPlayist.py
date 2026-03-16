@@ -19,7 +19,7 @@ def get_music_playlist():
             for line in f:
                 name = line.split("/")[-1]
                 left = name.find(" ")
-                right = name.find(".")
+                right = name.rfind(".")
                 name = name[left+1:right]
 
                 info["sub_list"].append(create_file_info(name))
