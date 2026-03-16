@@ -7,24 +7,36 @@
     </div>
 
     <div class="tree-wrapper">
-      <div v-if="loading" class="loading">正在加载文件列表...</div>
-      <div v-else-if="error" class="error">{{ error }}</div>
-      <div v-else class="tree-content">
-        <!-- 遍历根节点的数组 -->
-        <FileNode v-for="(item, index) in treeData" :key="index" :node="item" />
+      <div v-if="loading || loadingPlaylists" class="loading">正在加载数据...</div>
+      <div v-else-if="error || errorPlaylists" class="error">{{ error || errorPlaylists }}</div>
+      <div v-else>
+        <h2 class="section-title">播放列表</h2>
+        <div class="tree-content">
+          <FileNode v-for="(item, index) in playlistsData" :key="'pl-' + index" :node="item" />
+        </div>
+        
+        <hr class="section-divider" />
+        
+        <h2 class="section-title">文件列表</h2>
+        <div class="tree-content">
+          <!-- 遍历根节点的数组 -->
+          <FileNode v-for="(item, index) in treeData" :key="'file-' + index" :node="item" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-"]";
 import { ref, onMounted } from "vue";
 import FileNode from "./FileNode.vue";
 
 const treeData = ref([]);
+const playlistsData = ref([]);
 const loading = ref(true);
+const loadingPlaylists = ref(true);
 const error = ref(null);
+const errorPlaylists = ref(null);
 
 const fetchData = async () => {
   try {
@@ -45,8 +57,28 @@ const fetchData = async () => {
   }
 };
 
+const fetchPlaylistsData = async () => {
+  try {
+    const response = await fetch("/api/get-playlists");
+    if (!response.ok) throw new Error("网络请求失败");
+
+    const restBean = await response.json();
+    if (restBean.code == 200) {
+      playlistsData.value = restBean.data;
+    } else {
+      errorPlaylists.value = restBean.message;
+    }
+  } catch (err) {
+    errorPlaylists.value = "无法获取播放列表，请检查网络设置。";
+    console.error(err);
+  } finally {
+    loadingPlaylists.value = false;
+  }
+};
+
 onMounted(() => {
   fetchData();
+  fetchPlaylistsData();
 });
 </script>
 
@@ -103,5 +135,19 @@ body {
 
 .error {
   color: #d62828;
+}
+
+.section-title {
+  color: #3e3a37;
+  font-size: 20px;
+  margin: 10px 0 20px 0;
+  padding-left: 10px;
+  border-left: 4px solid #a0968a;
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px dashed #dcd5cc;
+  margin: 30px 0;
 }
 </style>
