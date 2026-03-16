@@ -28,7 +28,7 @@ const error = ref(null);
 
 const fetchData = async () => {
   try {
-    const response = await fetch("/api/getitems");
+    const response = await fetch("/api/get-items");
     if (!response.ok) throw new Error("网络请求失败");
 
     const restBean = await response.json();
