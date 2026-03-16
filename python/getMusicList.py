@@ -1,5 +1,5 @@
 from pathlib import Path
-import Const
+import const
 
 def create_file_info(name):
     return {
@@ -19,7 +19,7 @@ def folder_detect(folder_list, folder):
 
 def get_music_list():
     root_folder_list = []
-    folder = Path(Const.MUSIC_FOLDER)
+    folder = Path(const.MUSIC_FOLDER)
     
     for folder_item in sorted(folder.iterdir()): 
         if folder_item.is_dir() and folder_item.name.find(".") == -1:

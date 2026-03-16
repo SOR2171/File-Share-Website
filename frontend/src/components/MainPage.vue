@@ -31,8 +31,12 @@ const fetchData = async () => {
     const response = await fetch("/api/getitems");
     if (!response.ok) throw new Error("网络请求失败");
 
-    const data = await response.json();
-    treeData.value = data;
+    const restBean = await response.json();
+    if (restBean.code == 200) {
+      treeData.value = restBean.data;
+    } else {
+      error.value = restBean.message;
+    }
   } catch (err) {
     error.value = "无法获取数据，请检查网络设置。";
     console.error(err);
