@@ -100,7 +100,7 @@ const toggle = () => {
 
 .node-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 10px 16px;
   background-color: #ffffff;
   border-radius: 8px;
@@ -131,6 +131,7 @@ const toggle = () => {
   height: 24px;
   margin-right: 12px;
   flex-shrink: 0;
+  margin-top: -2px; /* 微调图标位置，使其与第一行文字对齐 */
 }
 
 .is-folder .icon {
@@ -146,9 +147,9 @@ const toggle = () => {
   color: #3e3a37;
   font-weight: 500;
   user-select: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-all;
+  line-height: 1.4;
 }
 
 /* 子节点层级缩进及左侧连接线 */
