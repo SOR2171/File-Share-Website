@@ -1,26 +1,38 @@
 <template>
   <div class="app-container">
     <div class="header">
-      <h1>云端文件检索</h1>
+      <h1>云端音乐检索</h1>
       <p class="subtitle">扁平化设计 · 支持无限层级</p>
       <p class="subtitle">by Gemini 3.1 Pro</p>
     </div>
 
     <div class="tree-wrapper">
-      <div v-if="loading || loadingPlaylists" class="loading">正在加载数据...</div>
-      <div v-else-if="error || errorPlaylists" class="error">{{ error || errorPlaylists }}</div>
+      <div v-if="loading || loadingPlaylists" class="loading">
+        正在加载数据...
+      </div>
+      <div v-else-if="error || errorPlaylists" class="error">
+        {{ error || errorPlaylists }}
+      </div>
       <div v-else>
         <h2 class="section-title">播放列表</h2>
         <div class="tree-content">
-          <FileNode v-for="(item, index) in playlistsData" :key="'pl-' + index" :node="item" />
+          <FileNode
+            v-for="(item, index) in playlistsData"
+            :key="'pl-' + index"
+            :node="item"
+          />
         </div>
-        
+
         <hr class="section-divider" />
-        
+
         <h2 class="section-title">文件列表</h2>
         <div class="tree-content">
           <!-- 遍历根节点的数组 -->
-          <FileNode v-for="(item, index) in treeData" :key="'file-' + index" :node="item" />
+          <FileNode
+            v-for="(item, index) in treeData"
+            :key="'file-' + index"
+            :node="item"
+          />
         </div>
       </div>
     </div>
