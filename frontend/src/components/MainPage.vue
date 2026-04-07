@@ -95,14 +95,51 @@ onMounted(() => {
 </script>
 
 <style>
+/* 全局变量定义 */
+:root {
+  --bg-page: #fdfbf7;
+  --bg-container: rgba(255, 255, 255, 0.4);
+  --bg-item: #ffffff;
+  --text-primary: #3e3a37;
+  --text-secondary: #a0968a;
+  --border-main: #f0e8da;
+  --border-divider: #dcd5cc;
+  --accent-folder: #f28c28;
+  --accent-file: #d62828;
+  --shadow-main: 0 8px 30px rgba(0, 0, 0, 0.02);
+  --shadow-item: 0 2px 4px rgba(0, 0, 0, 0.02);
+  --shadow-item-hover: 0 6px 12px rgba(0, 0, 0, 0.08);
+  --indent-line: #eaddcb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-page: #121212;
+    --bg-container: rgba(30, 30, 30, 0.6);
+    --bg-item: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #888888;
+    --border-main: #333333;
+    --border-divider: #444444;
+    --accent-folder: #ff9f43;
+    --accent-file: #ff4d4d;
+    --shadow-main: 0 8px 30px rgba(0, 0, 0, 0.2);
+    --shadow-item: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --shadow-item-hover: 0 6px 16px rgba(0, 0, 0, 0.4);
+    --indent-line: #444444;
+  }
+}
+
 /* 全局样式重置 */
 body {
   margin: 0;
   padding: 0;
-  background-color: #fdfbf7; /* 纸张淡黄色 */
+  background-color: var(--bg-page);
+  color: var(--text-primary);
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .app-container {
@@ -118,48 +155,49 @@ body {
 }
 
 .header h1 {
-  color: #3e3a37;
+  color: var(--text-primary);
   margin: 0 0 8px 0;
   font-size: 28px;
 }
 
 .subtitle {
-  color: #a0968a;
+  color: var(--text-secondary);
   margin: 0;
   font-size: 14px;
 }
 
 .tree-wrapper {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: var(--bg-container);
   border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f0e8da;
+  box-shadow: var(--shadow-main);
+  border: 1px solid var(--border-main);
+  transition: all 0.3s ease;
 }
 
 .loading,
 .error {
   text-align: center;
   padding: 40px;
-  color: #a0968a;
+  color: var(--text-secondary);
   font-size: 16px;
 }
 
 .error {
-  color: #d62828;
+  color: var(--accent-file);
 }
 
 .section-title {
-  color: #3e3a37;
+  color: var(--text-primary);
   font-size: 20px;
   margin: 10px 0 20px 0;
   padding-left: 10px;
-  border-left: 4px solid #a0968a;
+  border-left: 4px solid var(--text-secondary);
 }
 
 .section-divider {
   border: none;
-  border-top: 1px dashed #dcd5cc;
+  border-top: 1px dashed var(--border-divider);
   margin: 30px 0;
 }
 </style>

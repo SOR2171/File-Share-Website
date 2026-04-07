@@ -82,7 +82,7 @@ const isFile = computed(() => {
 
 // 处理名称，去掉 "folder:" 或 "file:" 前缀
 const displayName = computed(() => {
-  return props.node.name.replace(/^(folder|file):/, "");
+  return props.node.name;
 });
 
 // 切换文件夹展开/收起状态
@@ -102,10 +102,10 @@ const toggle = () => {
   display: flex;
   align-items: flex-start;
   padding: 10px 16px;
-  background-color: #ffffff;
+  background-color: var(--bg-item);
   border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  box-shadow: var(--shadow-item);
   border-left: 4px solid transparent;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -113,17 +113,17 @@ const toggle = () => {
 /* 扁平化+悬浮强调动画 */
 .node-item:hover {
   transform: translateX(6px) scale(1.01);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-item-hover);
 }
 
 .is-folder:hover {
-  border-left-color: #f28c28; /* 橘色强调 */
-  background-color: #fff9f2;
+  border-left-color: var(--accent-folder);
+  background-color: color-mix(in srgb, var(--accent-folder), transparent 94%);
 }
 
 .is-file:hover {
-  border-left-color: #d62828; /* 红色强调 */
-  background-color: #fff5f5;
+  border-left-color: var(--accent-file);
+  background-color: color-mix(in srgb, var(--accent-file), transparent 94%);
 }
 
 .icon {
@@ -135,16 +135,16 @@ const toggle = () => {
 }
 
 .is-folder .icon {
-  color: #f28c28; /* 橘色 */
+  color: var(--accent-folder);
 }
 
 .is-file .icon {
-  color: #d62828; /* 红色 */
+  color: var(--accent-file);
 }
 
 .node-name {
   font-size: 15px;
-  color: #3e3a37;
+  color: var(--text-primary);
   font-weight: 500;
   user-select: none;
   white-space: normal;
@@ -156,7 +156,7 @@ const toggle = () => {
 .node-children {
   margin-left: 22px;
   padding-left: 12px;
-  border-left: 2px dashed #eaddcb; /* 淡淡的纸张折痕色 */
+  border-left: 2px dashed var(--indent-line);
   margin-top: 4px;
 }
 </style>

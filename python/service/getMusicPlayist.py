@@ -16,11 +16,13 @@ def get_music_playlist():
     for m3u8_item in m3u8_list:
         info = create_file_info(m3u8_item.name[0:-5])
         with open(m3u8_item, "r", encoding="utf-8") as f:
+            count = 1
             for line in f:
                 name = line.split("/")[-1]
                 left = name.find(" ")
                 right = name.rfind(".")
-                name = name[left+1:right]
+                name = "{0:02d}".format(count) + ". " + name[left+1:right]
+                count += 1
 
                 info["sub_list"].append(create_file_info(name))
         music_list.append(info)
